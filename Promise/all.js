@@ -35,7 +35,8 @@ function myPromiseall(promises) {
 } 
 */
 
-// promise.all 的例子
+// promise.all 请求全部成功的例子
+/* 
 let p1 = new Promise(function (resolve, reject) {
   setTimeout(function () {
     resolve(1)
@@ -57,3 +58,27 @@ let p3 = new Promise(function (resolve, reject) {
 Promise.all([p3, p1, p2]).then((res) => {
   console.log(res) 
 })
+ */
+
+let p1 = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+      resolve(1)
+  }, 1000)
+})
+let p2 = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+      reject(2)
+  }, 3000)
+})
+let p3 = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+      reject(3)
+  }, 10000)
+})
+// promise 如果不是全部成功的状态 打印结果 是第一个 reject 的实例，也就是 2
+Promise.all([p3, p1, p2]).then(res => {
+  console.log(res)
+}, err => {
+  console.log(err);
+})
+
